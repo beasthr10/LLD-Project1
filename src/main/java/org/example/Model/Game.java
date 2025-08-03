@@ -149,9 +149,56 @@ public class Game {
 
     //Methods
     public void startNewGame(){}
-    public void makeMove(){}
+
+    public void makeMove(){
+        // Get the player
+        // Take the input from the player
+        // Update the cell state
+        // Store to the moves
+        // Calculate next player
+        // check winner
+        // check draw
+        Player currentPlayer = players.get(nextMovePlayerIndx);
+        System.out.println("Player " + currentPlayer.getName() + " makes a move.");
+        Move currentMove = currentPlayer.makeMove(board);
+
+        if(!isMoveAllowed(currentMove)){
+            System.out.println("Invalid move. Try again.");
+        }
+        int currentRow = currentMove.getCell().getRow();
+        int currentCol = currentMove.getCell().getCol();
+        Cell currentCell = board.getBoard().get(currentRow).get(currentCol);
+        currentCell.setCellState(CellState.FILLED);
+        currentCell.setPlayer(currentPlayer);
+        Move newmove = new Move(currentMove.getCell(),currentPlayer);
+        moves.add(newmove);
+
+        nextMovePlayerIndx +=1;
+        nextMovePlayerIndx %= players.size();
+
+        // Check for winner
+
+
+
+
+
+
+
+
+
+
+
+
+    }
     public String getCurrentState(){return null;}
-    public boolean isMoveAllowed(Cell cell){return false;}
+
+    public boolean isMoveAllowed(Move move){
+        return false;
+         //validation case if row and col is out of board size
+        //validation case if cell is already occupied
+    }
+
+
     public void printboard() {
          board.display();
     }

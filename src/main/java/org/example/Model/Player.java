@@ -51,4 +51,18 @@ public class Player {
 
     //Methods
     private void leave_game(){}
+
+    public Move makeMove(Board board) {
+        System.out.println("Enter the row and column to place your symbol (e.g., 1 2): ");
+        int row = scanner.nextInt() - 1; // Adjust for 0-based index
+        int col = scanner.nextInt() - 1; // Adjust for 0-based index
+
+        Cell cell = new Cell(row, col);
+        if (board.isValidPosition(cell)) {
+            return new Move(cell, this);
+        } else {
+            System.out.println("Invalid move. Try again.");
+            return makeMove(board); // Retry if the move is invalid
+        }
+    }
 }
