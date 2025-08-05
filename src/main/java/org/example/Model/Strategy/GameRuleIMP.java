@@ -6,16 +6,18 @@ import org.example.Model.Move;
 import java.util.List;
 
 public class GameRuleIMP implements GameRule{
-    public List<WinningStrategy> winningStrategies;
-
-    @Override
-    public Boolean checkDraw(Board board, Move move) {
-        return null;
+    public List<WinningStrategy> winningStrategies(Board board, Move move) {;
+        return List.of(
+                new RowWinningStrategy(),
+                new ColWinningStrategy(),
+                new DiagnoalWinningStrategy(),
+                new AntiDiagnoalWinningStrategy()
+        );
     }
 
     @Override
-    public Boolean checkWin(Board board, Move move) {
-        return null;
+    public Boolean checkDraw(Board board, Move move) {
+       return null;
     }
 
     @Override

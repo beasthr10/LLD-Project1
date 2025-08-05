@@ -15,6 +15,7 @@ public class Player {
         this.name = name;
         this.symbol = symbol;
         this.playerType = playerType;
+        this.scanner = new Scanner(System.in);
     }
 
     //Getter&Setter
@@ -53,9 +54,10 @@ public class Player {
     private void leave_game(){}
 
     public Move makeMove(Board board) {
-        System.out.println("Enter the row and column to place your symbol (e.g., 1 2): ");
-        int row = scanner.nextInt() - 1; // Adjust for 0-based index
-        int col = scanner.nextInt() - 1; // Adjust for 0-based index
+        System.out.println("Enter the rowno");
+        int row = scanner.nextInt();
+        System.out.println("Enter the colno");// Adjust for 0-based index
+        int col = scanner.nextInt(); // Adjust for 0-based index
 
         Cell cell = new Cell(row, col);
         if (board.isValidPosition(cell)) {

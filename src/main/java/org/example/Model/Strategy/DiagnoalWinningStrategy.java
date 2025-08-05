@@ -6,6 +6,11 @@ import org.example.Model.Move;
 public class DiagnoalWinningStrategy implements WinningStrategy{
     @Override
     public Boolean checkWin(Board board, Move move) {
-        return null;
+        return false;
+    }
+
+    @Override
+    public void handleundo(Board board, Move move) {
+
     }
 }

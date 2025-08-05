@@ -44,10 +44,11 @@ public class Main {
             String undoResponse = scanner.nextLine();
             if (undoResponse.equalsIgnoreCase("yes")) {
                 gameController.undo(game);
-                continue; // Skip to the next iteration to reprint the board
+                continue;
+                // Skip to the next iteration to reprint the board
             }
             // Make the move
-            gameController.makeMove(game, players.get(game.getNextMovePlayerIndx()), 0, 0);
+            gameController.makeMove(game);
 
         }
         // Print the final board and game result

@@ -24,10 +24,12 @@ public class GameController {
         }
         return game.getGameState();
     }
-    public void makeMove(Game game, Player player, int row, int col) {
-
+    public void makeMove(Game game) {
+        game.makeMove();
     }
-    public void undo(Game game){}
+    public void undo(Game game){
+        game.undo();
+    }
 
     public void printBoard(Game game) {
         if (game == null || game.getBoard() == null) {

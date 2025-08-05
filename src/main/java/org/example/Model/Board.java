@@ -51,6 +51,6 @@ public class Board{
 
 
     public boolean isValidPosition(Cell cell) {
-        return false;
+        return true;
     }
 }

@@ -1,6 +1,7 @@
 package org.example.Model;
 
 import org.example.Model.Strategy.GameRule;
+import org.example.Model.Strategy.WinningStrategy;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,6 +28,8 @@ public class Game {
     public static Builder getBuilder() {
         return new Builder();
     }
+
+
 
     //Builder
     public static class Builder{
@@ -167,9 +170,11 @@ public class Game {
         }
         int currentRow = currentMove.getCell().getRow();
         int currentCol = currentMove.getCell().getCol();
+        System.out.println("Player " + currentPlayer.getName() + " placed a " + currentPlayer.getSymbol() + " at row " + currentRow + " and column " + currentCol);
         Cell currentCell = board.getBoard().get(currentRow).get(currentCol);
         currentCell.setCellState(CellState.FILLED);
         currentCell.setPlayer(currentPlayer);
+
         Move newmove = new Move(currentMove.getCell(),currentPlayer);
         moves.add(newmove);
 
@@ -177,17 +182,19 @@ public class Game {
         nextMovePlayerIndx %= players.size();
 
         // Check for winner
-
-
-
-
-
-
-
-
-
-
-
+           if(gamerule.winningStrategies(board,currentMove).stream().anyMatch(strategy -> strategy.checkWin(board,currentMove))){
+            gameState = GameState.WIN;
+            winner = currentPlayer;
+            System.out.println("Player " + currentPlayer.getName() + " wins!");
+           }
+           else if(moves.size() == board.getSize()*board.getSize()){
+            gameState = GameState.DRAW;
+            System.out.println("The game is a draw!");
+           }
+           else {
+            gameState = GameState.IN_PROGRESS;
+            System.out.println("Game is still in progress.");
+           }
 
     }
     public String getCurrentState(){return null;}
@@ -197,6 +204,37 @@ public class Game {
          //validation case if row and col is out of board size
         //validation case if cell is already occupied
     }
+    public void undo() {
+        if (moves.isEmpty()) {
+            System.out.println("No moves to undo.");
+            return;
+        }
+        if(!gameState.equals(GameState.IN_PROGRESS)){
+            System.out.println("Cannot undo moves when the game is not in progress.");
+            return;
+        }
+        //Get the last move
+        //Remove the last move from the moves list
+        //Update the cell state to EMPTY
+        //Set the player of the cell to null
+        //Update the nextMovePlayerIndx to the previous player
+        //update the HashMap
+        //Print the message that the last move is undone
+
+        Move lastMove = moves.get(moves.size() - 1);
+        moves.remove(lastMove);
+        // Update the cell state to EMPTY
+        Cell lastCell = lastMove.getCell();
+        lastCell.setCellState(CellState.EMPTY);
+        lastCell.setPlayer(null);
+        nextMovePlayerIndx = (nextMovePlayerIndx - 1 + players.size()) % players.size();
+        System.out.println("Last move undone. Player " + lastMove.getPlayer().getName() + "'s turn again.");
+
+        for(WinningStrategy )
+
+
+    }
+    
 
 
     public void printboard() {

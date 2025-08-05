@@ -5,6 +5,6 @@ import org.example.Model.Move;
 
 public interface GameRule {
     Boolean checkDraw(Board board, Move move);
-    Boolean checkWin(Board board, Move move);
+    java.util.List<WinningStrategy> winningStrategies(Board board, Move move);
     String getRuleInfo();
 }
